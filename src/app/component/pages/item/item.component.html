@@ -1,0 +1,77 @@
+<mat-card *ngIf="product">
+  <mat-card-title>{{ product.description }}</mat-card-title>
+  <form #productForm="ngForm">
+    <table>
+      <tr>
+        <td>
+          <mat-form-field class="me-2" appearance="fill">
+            <mat-label *ngIf="productAmount.valid">Quantidade em Estoque</mat-label>
+            <input [(ngModel)]="product.amount" name="amount" matInput required #productAmount="ngModel" [ngClass]="{'is-invalid': productAmount.invalid}">
+            <div class="invalid-feedback">
+              <span>Informe a quantidade</span>
+            </div>
+          </mat-form-field>
+        </td>
+        <td><mat-form-field appearance="fill">
+          <mat-label *ngIf="productPrice.valid">Preço</mat-label>
+          <input [(ngModel)]="product.price" name="price" matInput required #productPrice="ngModel" [ngClass]="{'is-invalid': productPrice.invalid}">
+          <div class="invalid-feedback">
+            <span>Informe o preço</span>
+          </div>
+        </mat-form-field></td>
+      </tr>
+    </table>
+  </form>
+
+  <mat-card-actions>
+    <button [disabled]="productForm.invalid" mat-stroked-button color="accent">
+      <mat-icon>done_outline</mat-icon>
+    </button>
+    <button mat-stroked-button color="warn">
+      <mat-icon>backspace</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card *ngIf="!product">
+  <form [formGroup]="productForm">
+    <table>
+      <tr>
+        <td>
+          <mat-form-field class="me-2" appearance="fill">
+            <mat-label for="id">Code</mat-label>
+            <input type="text" matInput readonly="true" formControlName="id">
+          </mat-form-field>
+          <div>
+            <mat-form-field class="me-2" appearance="fill" style="width: 500px;">
+              <mat-label for="description">Descrição</mat-label>
+              <input type="text" matInput required formControlName="description">
+            </mat-form-field>
+            <app-invalid-form [formGroup]="productForm" nameControl="description"></app-invalid-form>
+          </div>
+          <div style="display:flex; flex-direction: row;">
+            <div>
+              <mat-form-field class="me-2" appearance="fill" style="width: 246px;">
+                <mat-label for="amount">Quantidade em Estoque</mat-label>
+                <input type="text" matInput required formControlName="amount">
+              </mat-form-field>
+              <app-invalid-form [formGroup]="productForm" nameControl="amount"></app-invalid-form>
+            </div>
+            <div>
+              <mat-form-field class="me-2" appearance="fill" style="width: 246px;">
+                <mat-label for="price">Preço</mat-label>
+                <input type="text" matInput required formControlName="price">
+              </mat-form-field>
+              <app-invalid-form [formGroup]="productForm" nameControl="price"></app-invalid-form>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </form>
+  <div class="mt-4">
+    <button class="me-2" mat-raised-button color="accent" style="height: 40px;">Salvar</button>
+    <button class="me-2" mat-raised-button color="warn" style="height: 40px;">Cancelar</button>
+  </div>
+</mat-card>
+

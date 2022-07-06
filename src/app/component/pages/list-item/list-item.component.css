@@ -1,0 +1,24 @@
+table {
+  width: 80%;
+}
+
+.formGroup {
+  width: 80%;
+  margin-bottom: 20px;
+}
+
+label {
+  color: white;
+}
+
+.iterationButtons {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
+
+
+
